@@ -59,6 +59,28 @@
       animation: pulse 2s infinite;
     }
 
+    .whatsapp-banner{
+      display:block;
+      margin:30px 0;
+      border-radius:15px;
+      overflow:hidden;
+      transition:0.3s;
+    }
+
+    .whatsapp-banner img{
+      width:100%;
+      display:block;
+      border-radius:15px;
+    }
+
+    .whatsapp-banner:hover{
+      transform:scale(1.03);
+    }
+
+    .whatsapp-banner:hover{
+      transform:scale(1.03);
+    }
+
     .section{ margin-top:40px; }
 
     .carousel{
@@ -138,12 +160,21 @@ const data = {
   title:"Influencer Digital",
   banner:"https://github.com/ivanasamara/ivanasamara/blob/main/ivana.png?raw=true",
   bioLink:"https://www.instagram.com/ivana_samara_oficial",
+  whatsappLink:"#",
+  whatsappBanner:"https://github.com/ivanasamara/ivanasamara/blob/main/bannerivanagrupo.png?raw=true",
   products:[
     {name:"Tônico Laranja Poderoso", image:"https://goold.shop/_next/image?url=https%3A%2F%2Ffirebasestorage.googleapis.com%2Fv0%2Fb%2Fgold-spell.firebasestorage.app%2Fo%2Fproducts%252F6018029a-38ef-412f-8e7d-039a088a41a3%252Fe28380c9-f4c1-4938-9522-5e4e84c0a12b%3Falt%3Dmedia%26token%3Deaec6a16-8d1c-4611-b735-fc806d26bdd5&w=1200&q=75", link:"https://pay.goold.club/aff/M7LKWO/UH4QZD35"},
     {name:"Alisei 250ml - By Fioterapia", image:"https://goold.shop/_next/image?url=https%3A%2F%2Ffirebasestorage.googleapis.com%2Fv0%2Fb%2Fgold-spell.firebasestorage.app%2Fo%2Fproducts%252F3f1bc705-d11e-4417-a607-a0b419618625%252Fc941428a-1702-44f3-8022-10b5c5b6664e%3Falt%3Dmedia%26token%3D1bcb7052-fc50-4d17-88e0-2477b36e1eb1&w=1200&q=75", link:"https://pay.goold.club/aff/ANTK1P/UH4QZD35"},
     {name:"Shampoo Laranja Poderoso", image:"https://goold.shop/_next/image?url=https%3A%2F%2Ffirebasestorage.googleapis.com%2Fv0%2Fb%2Fgold-spell.firebasestorage.app%2Fo%2Fproducts%252F331e5b9d-f167-4747-a24b-7673775cd510%252Fbb136d5c-1070-4603-87e0-296bc96db1c0%3Falt%3Dmedia%26token%3D87ea8ec0-fb62-48f6-b8c5-6d05fad6538d&w=1200&q=75", link:"https://pay.goold.club/aff/OAMD16/UH4QZD35"},
     {name:"Liso Ético", image:"https://goold.shop/_next/image?url=https%3A%2F%2Ffirebasestorage.googleapis.com%2Fv0%2Fb%2Fgold-spell.firebasestorage.app%2Fo%2Fproducts%252Fef3e64a2-5f0c-4324-a402-f5ec1468de7a%252F1b19de28-c009-499e-a433-221df711672c%3Falt%3Dmedia%26token%3D4f8e7ddf-797f-43a4-be32-afe646dc2ed2&w=1200&q=75", link:"https://pay.goold.club/aff/NDPFYC/UH4QZD35"},
     {name:"Condy Laranja Poderoso", image:"https://goold.shop/_next/image?url=https%3A%2F%2Ffirebasestorage.googleapis.com%2Fv0%2Fb%2Fgold-spell.firebasestorage.app%2Fo%2Fproducts%252F66682edc-42ae-47cc-b420-b22603459d4c%252Fb0102e05-8b71-4b5b-82b4-15f706b5da13%3Falt%3Dmedia%26token%3D5eab82b7-f829-4af5-ba95-b5f16f2d8e0b&w=1200&q=75", link:"https://pay.goold.club/aff/1UYWHJ/UH4QZD35"}
+  ],
+  moreProducts:[
+    {name:"Body Splash My Sweet Delight", image:"https://www.thebarboursbeauty.com.br/cdn/shop/files/Body_Splash_My_Sweet_Delight_Desodorante_Colonia_200ml_29a6ecc8-12b8-4b20-8db4-e1c538981bf9.png?v=1770147891&width=1000", link:"https://www.thebarboursbeauty.com.br/products/body-splash-delight-deo-colonia-6947ecad195b8"},
+    {name:"Perfume para cabelo / finalizador termoativo Very Sexy", image:"https://www.thebarboursbeauty.com.br/cdn/shop/files/Perfume_para_cabelo_finalizador_termoativo_Very_Sexy.png?v=1770146781&width=1000", link:"https://www.thebarboursbeauty.com.br/products/very-sexy-perfume-para-cabelo-694274543d28d"},
+    {name:"Body Splash Good Graces", image: "https://www.thebarboursbeauty.com.br/cdn/shop/files/Body_Splash_Good_Graces_Desodorante_Colonia_200ml.png?v=1770147429&width=1000", link: "https://www.thebarboursbeauty.com.br/products/body-splash-good-graces-desodorante-colonia-200ml-69482a05844a2"},
+    {name:"Geleia Hidratante Desodorante Corporal My Sweet Delight", image: "https://www.thebarboursbeauty.com.br/cdn/shop/files/Geleia_Hidratante_Desodorante_Corporal_My_Sweet_Delight_200g.png?v=1770740008&width=1000", link: "https://www.thebarboursbeauty.com.br/products/geleia-hidratante-corporal-my-sweet-delight-6948182984e6d"},
+    {name:"Perfume para cabelo My Sweet Delight / finalizador termoativo", image: "https://www.thebarboursbeauty.com.br/cdn/shop/files/Perfume_para_cabelo_My_Sweet_Delight_finalizador_termoativo.png?v=1770145345&width=1000", link: "https://www.thebarboursbeauty.com.br/products/perfume-para-cabelo-delight-finalizador-termoativo-ref-olfativa-delina-694803dd48bd6"}
   ],
   socials:[
     {name:"Instagram", icon:"https://cdn-icons-png.flaticon.com/512/2111/2111463.png", link:"https://www.instagram.com/ivana_samara_oficial"},
@@ -180,7 +211,7 @@ createApp({
     <a class='bio-btn' :href='data.bioLink' target='_blank'>🔗 Link na Bio</a>
 
     <div class='section'>
-      <h2>Produtos que uso</h2>
+      <h2>Produtos Gold Spell que uso.</h2>
       <div class='carousel'>
         <div class='card' v-for='p in data.products'>
           <a :href='p.link' target='_blank'><img :src='p.image'></a>
@@ -188,6 +219,20 @@ createApp({
         </div>
       </div>
     </div>
+
+    <div class='section'>
+      <h2>Produtos Barbour's que uso.</h2>
+      <div class='carousel'>
+        <a class='card' v-for='p in data.moreProducts' :href='p.link' target='_blank'>
+          <img :src='p.image'>
+          <h3>{{p.name}}</h3>
+        </a>
+      </div>
+    </div>
+
+    <a class='whatsapp-banner' :href='data.whatsappLink' target='_blank'>
+      <img :src='data.whatsappBanner'>
+    </a>
 
     <div class='section'>
       <h2>Redes Sociais</h2>
