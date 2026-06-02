@@ -3,259 +3,522 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Ivana Samara</title>
+  <title>Ivana Samara | Links</title>
+  
+  <!-- Fonte Moderna -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+  
+  <!-- Vue 3 -->
   <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+  
   <style>
-    a,
-    a:visited,
-    a:hover,
-    a:active {
-      color: white;
+    :root {
+      --bg: #0f0f1a;
+      --card-bg: rgba(30, 30, 47, 0.6);
+      --card-border: rgba(255, 255, 255, 0.1);
+      --text: #ffffff;
+      --text-muted: #b3b3b3;
+      --accent: #ff4fd8;
+      --accent-hover: #e03bc0;
+      --shadow: rgba(0, 0, 0, 0.3);
+    }
+
+    body.light {
+      --bg: #f0f2f5;
+      --card-bg: rgba(255, 255, 255, 0.6);
+      --card-border: rgba(0, 0, 0, 0.05);
+      --text: #1a1a1a;
+      --text-muted: #555555;
+      --accent: #ff4fd8;
+      --accent-hover: #e03bc0;
+      --shadow: rgba(0, 0, 0, 0.1);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      transition: background 0.4s ease, color 0.4s ease;
+      overflow-x: hidden;
+      min-height: 100vh;
+    }
+
+    /* Efeitos de Partículas */
+    .particles-container {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      pointer-events: none;
+      z-index: 9999;
+      overflow: hidden;
+    }
+    .particle {
+      position: absolute;
+      top: -10%;
+      font-size: 24px;
+      animation: fall linear infinite;
+      opacity: 0.8;
+    }
+    @keyframes fall {
+      0% { transform: translateY(-10vh) rotate(0deg); opacity: 1; }
+      100% { transform: translateY(110vh) rotate(360deg); opacity: 0; }
+    }
+
+    /* Layout Principal */
+    .container {
+      max-width: 800px;
+      margin: auto;
+      padding: 20px;
+      position: relative;
+      z-index: 10;
+      padding-top: 80px; /* Espaço para o menu de configurações */
+    }
+
+    a {
       text-decoration: none;
-    }
-    :root{
-      --bg:#0f0f1a;
-      --card:#1b1b2f;
-      --text:#ffffff;
-      --accent:#ff4fd8;
-    }
-    .light{
-      --bg:#f5f5f5;
-      --card:#ffffff;
-      --text:#111;
-      --accent:#ff4fd8;
+      color: var(--text);
     }
 
-    body{ margin:0; font-family: Arial; background:var(--bg); color:var(--text); transition:0.3s; }
-    .container{ max-width:1100px; margin:auto; padding:20px; }
-
-    .banner{
-      height:320px;
-      border-radius:20px;
-      background-size:cover;
-      background-position:center;
-      display:flex;
-      align-items:flex-end;
-      padding:20px;
-      animation: fadeIn 1s ease;
+    /* Menu de Configurações (Vidro) */
+    .config-panel {
+      position: fixed;
+      top: 15px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: var(--card-bg);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid var(--card-border);
+      padding: 10px 20px;
+      border-radius: 30px;
+      display: flex;
+      gap: 15px;
+      align-items: center;
+      z-index: 100;
+      box-shadow: 0 4px 15px var(--shadow);
     }
 
-    .title{ font-size:34px; font-weight:bold; }
-    .subtitle{ opacity:0.8; }
-
-    .toggle{
-      position:fixed;
-      top:15px;
-      right:15px;
-      background:var(--card);
-      padding:10px;
-      border-radius:10px;
-      cursor:pointer;
-    }
-
-    .bio-btn{
-      display:block;
-      text-align:center;
-      background:var(--accent);
-      padding:15px;
-      border-radius:15px;
-      margin:20px 0;
-      color:#fff;
-      text-decoration:none;
-      font-weight:bold;
-      animation: pulse 2s infinite;
-    }
-
-    .whatsapp-banner{
-      display:block;
-      margin:30px 0;
-      border-radius:15px;
-      overflow:hidden;
-      transition:0.3s;
-    }
-
-    .whatsapp-banner img{
-      width:100%;
-      display:block;
-      border-radius:15px;
-    }
-
-    .whatsapp-banner:hover{
-      transform:scale(1.03);
-    }
-
-    .whatsapp-banner:hover{
-      transform:scale(1.03);
-    }
-
-    .section{ margin-top:40px; }
-
-    .carousel{
-      display:flex;
-      overflow-x:auto;
-      gap:15px;
-      scroll-snap-type:x mandatory;
-    }
-
-    .card{
-      min-width:220px;
-      background:var(--card);
-      padding:15px;
-      border-radius:15px;
-      text-align:center;
-      scroll-snap-align:start;
-      transition:0.3s;
-    }
-
-    .card:hover{ transform:scale(1.05); }
-
-    .card img{ width:100%; border-radius:10px; }
-
-    .social{
-      display:flex;
-      gap:10px;
-      flex-wrap:wrap;
-    }
-
-    .social a{
-      background:var(--card);
-      padding:10px 15px;
-      border-radius:10px;
-      text-decoration:none;
-      color:var(--text);
-      display:flex;
-      align-items:center;
-      gap:8px;
-      transition:0.3s;
-    }
-
-    .social img{
-      width:20px;
-      height:20px;
-    }
-
-    .social a:hover{ background:var(--accent); color:#fff; }
-
-    footer{ text-align:center; margin-top:50px; opacity:0.6; }
-
-    @media(min-width:768px){
-      .banner{
-        background-position:center 31%;
-        height:380px;
-      }
+    .config-panel select, .config-panel button {
+      background: transparent;
+      border: 1px solid var(--text-muted);
+      color: var(--text);
+      padding: 5px 10px;
+      border-radius: 15px;
+      font-family: 'Poppins', sans-serif;
+      cursor: pointer;
+      outline: none;
+      transition: 0.3s;
     }
     
-    @keyframes fadeIn{
-      from{ opacity:0; transform:translateY(31px); }
-      to{ opacity:1; transform:translateY(0); }
+    .config-panel select:hover, .config-panel button:hover {
+      border-color: var(--accent);
+      color: var(--accent);
     }
 
-    @keyframes pulse{
-      0%{ transform:scale(1); }
-      50%{ transform:scale(1.05); }
-      100%{ transform:scale(1); }
+    .config-panel select option {
+      background: var(--bg);
+      color: var(--text);
     }
 
+    /* Banner de Perfil */
+    .banner {
+      height: 300px;
+      border-radius: 25px;
+      background-size: cover;
+      background-position: center 20%;
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      align-items: flex-end;
+      padding: 30px;
+      box-shadow: 0 10px 30px var(--shadow);
+      animation: fadeInUp 1s ease;
+    }
+
+    .banner::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 60%;
+      background: linear-gradient(to top, rgba(0,0,0,0.9), transparent);
+      z-index: 1;
+    }
+
+    .banner-content {
+      position: relative;
+      z-index: 2;
+      color: white; /* Sempre branco no banner por causa da sombra */
+    }
+
+    .title { font-size: 36px; font-weight: 700; line-height: 1.2; text-shadow: 2px 2px 4px rgba(0,0,0,0.5); }
+    .subtitle { font-size: 16px; opacity: 0.9; font-weight: 300; }
+
+    /* Botão Destaque */
+    .bio-btn {
+      display: block;
+      text-align: center;
+      background: linear-gradient(45deg, var(--accent), #ff7eb3);
+      padding: 16px;
+      border-radius: 20px;
+      margin: 25px 0;
+      color: #fff;
+      font-weight: 600;
+      font-size: 18px;
+      box-shadow: 0 8px 20px rgba(255, 79, 216, 0.4);
+      transition: all 0.3s ease;
+      animation: pulseBtn 2s infinite;
+    }
+
+    .bio-btn:hover {
+      transform: translateY(-3px) scale(1.02);
+      box-shadow: 0 12px 25px rgba(255, 79, 216, 0.6);
+    }
+
+    /* Seções e Carrosséis */
+    .section {
+      margin-top: 40px;
+      animation: fadeInUp 1s ease 0.2s both;
+    }
+
+    .section h2 {
+      font-size: 20px;
+      margin-bottom: 15px;
+      padding-left: 5px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .section h2::before {
+      content: '';
+      display: inline-block;
+      width: 5px;
+      height: 20px;
+      background: var(--accent);
+      border-radius: 5px;
+    }
+
+    .carousel {
+      display: flex;
+      overflow-x: auto;
+      gap: 15px;
+      scroll-snap-type: x mandatory;
+      padding-bottom: 15px; /* Espaço para sombra */
+    }
+
+    /* Esconder Scrollbar mas manter funcionalidade */
+    .carousel::-webkit-scrollbar { height: 6px; }
+    .carousel::-webkit-scrollbar-track { background: transparent; }
+    .carousel::-webkit-scrollbar-thumb { background: var(--card-border); border-radius: 10px; }
+
+    .card {
+      min-width: 200px;
+      max-width: 200px;
+      background: var(--card-bg);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border: 1px solid var(--card-border);
+      padding: 15px;
+      border-radius: 20px;
+      text-align: center;
+      scroll-snap-align: start;
+      transition: all 0.3s ease;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 10px 20px var(--shadow);
+      border-color: var(--accent);
+    }
+
+    .card img {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+      border-radius: 12px;
+      margin-bottom: 15px;
+    }
+
+    .card h3 {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--text);
+    }
+
+    /* Banner WhatsApp */
+    .whatsapp-banner {
+      display: block;
+      margin: 40px 0;
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 10px 25px var(--shadow);
+      transition: all 0.3s ease;
+      animation: fadeInUp 1s ease 0.4s both;
+    }
+
+    .whatsapp-banner img {
+      width: 100%;
+      display: block;
+      border-radius: 20px;
+      transition: transform 0.5s ease;
+    }
+
+    .whatsapp-banner:hover {
+      transform: scale(1.02);
+      box-shadow: 0 15px 30px var(--shadow);
+    }
+
+    /* Redes Sociais Grid */
+    .social-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 15px;
+    }
+
+    .social-card {
+      background: var(--card-bg);
+      backdrop-filter: blur(10px);
+      border: 1px solid var(--card-border);
+      padding: 15px;
+      border-radius: 15px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      font-weight: 600;
+      transition: all 0.3s ease;
+    }
+
+    .social-card img {
+      width: 24px;
+      height: 24px;
+    }
+
+    .social-card:hover {
+      background: var(--accent);
+      color: white;
+      transform: translateY(-5px);
+      box-shadow: 0 8px 15px rgba(255, 79, 216, 0.3);
+    }
+    
+    .social-card:hover img {
+      filter: brightness(0) invert(1);
+    }
+
+    /* Footer */
+    footer {
+      text-align: center;
+      margin-top: 60px;
+      padding-bottom: 30px;
+      font-size: 14px;
+      color: var(--text-muted);
+    }
+    footer a {
+      color: var(--accent);
+      font-weight: bold;
+    }
+
+    /* Keyframes */
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes pulseBtn {
+      0% { box-shadow: 0 0 0 0 rgba(255, 79, 216, 0.6); }
+      70% { box-shadow: 0 0 0 15px rgba(255, 79, 216, 0); }
+      100% { box-shadow: 0 0 0 0 rgba(255, 79, 216, 0); }
+    }
+
+    @media (min-width: 768px) {
+      .banner { height: 400px; }
+      .title { font-size: 48px; }
+      .container { padding-top: 100px; }
+    }
   </style>
 </head>
-<body :class="theme">
-  <div id="app"></div>
+<body class="dark">
+  <div id="app">
+    <!-- Overlay de Partículas Sazonais -->
+    <div class="particles-container" v-if="effect !== 'none'">
+      <div v-for="p in activeParticles" :key="p.id" class="particle" 
+           :style="{ left: p.left + '%', animationDelay: p.delay + 's', animationDuration: p.duration + 's', fontSize: p.size + 'px' }">
+        {{ p.emoji }}
+      </div>
+    </div>
+
+    <!-- Painel de Configurações (Fixo no Topo) -->
+    <div class="config-panel">
+      <button @click="toggleTheme" title="Alternar Tema">
+        {{ theme === 'dark' ? '☀️ Claro' : '🌙 Escuro' }}
+      </button>
+      <select v-model="effect" title="Escolha um Efeito">
+        <option value="none">✨ Sem Efeito</option>
+        <option value="saojoao">🔥 São João</option>
+        <option value="namorados">💘 Namorados</option>
+        <option value="natal">❄️ Natal</option>
+      </select>
+    </div>
+
+    <div class="container">
+      
+      <!-- Banner Principal -->
+      <div class="banner" :style="{ backgroundImage: 'url(' + data.banner + ')' }">
+        <div class="banner-content">
+          <div class="title">{{ data.name }}</div>
+          <div class="subtitle">{{ data.title }}</div>
+        </div>
+      </div>
+
+      <!-- Link Principal -->
+      <a class="bio-btn" :href="data.bioLink" target="_blank">
+        🔗 Conheça meu Instagram
+      </a>
+
+      <!-- Seção 1 -->
+      <div class="section">
+        <h2>Produtos Gold Spell</h2>
+        <div class="carousel">
+          <a class="card" v-for="p in data.products" :key="p.name" :href="p.link" target="_blank">
+            <img :src="p.image" :alt="p.name">
+            <h3>{{ p.name }}</h3>
+          </a>
+        </div>
+      </div>
+
+      <!-- Seção 2 -->
+      <div class="section">
+        <h2>Linha Barbour's Beauty</h2>
+        <div class="carousel">
+          <a class="card" v-for="p in data.moreProducts" :key="p.name" :href="p.link" target="_blank">
+            <img :src="p.image" :alt="p.name">
+            <h3>{{ p.name }}</h3>
+          </a>
+        </div>
+      </div>
+
+      <!-- Banner WhatsApp -->
+      <a class="whatsapp-banner" :href="data.whatsappLink" target="_blank">
+        <img :src="data.whatsappBanner" alt="Grupo VIP WhatsApp">
+      </a>
+
+      <!-- Redes Sociais -->
+      <div class="section">
+        <h2>Minhas Redes</h2>
+        <div class="social-grid">
+          <a class="social-card" v-for="s in data.socials" :key="s.name" :href="s.link" target="_blank">
+            <img :src="s.icon" :alt="s.name"> 
+            <span>{{ s.name }}</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- Rodapé -->
+      <footer>
+        © 2026 - {{ data.name }} <br>
+        Desenvolvido por <a href="https://github.com/BlackMix" target="_blank">Mix Dev</a>
+      </footer>
+
+    </div>
+  </div>
 
 <script>
 const data = {
-  name:"Ivana Samara",
-  title:"Influencer Digital",
-  banner:"https://github.com/ivanasamara/ivanasamara/blob/main/ivana.png?raw=true",
-  bioLink:"https://www.instagram.com/ivana_samara_oficial",
-  whatsappLink:"https://chat.whatsapp.com/Gam2qpzYaJSDrkeGCNaETX?mode=gi_t",
-  whatsappBanner:"https://github.com/ivanasamara/ivanasamara/blob/main/bannerivanagrupo.png?raw=true",
-  products:[
+  name: "Ivana Samara",
+  title: "Influencer Digital & Beleza",
+  banner: "https://github.com/ivanasamara/ivanasamara/blob/main/ivana.png?raw=true",
+  bioLink: "https://www.instagram.com/ivana_samara_oficial",
+  whatsappLink: "https://chat.whatsapp.com/Gam2qpzYaJSDrkeGCNaETX?mode=gi_t",
+  whatsappBanner: "https://github.com/ivanasamara/ivanasamara/blob/main/bannerivanagrupo.png?raw=true",
+  products: [
     {name:"Tônico Laranja Poderoso", image:"https://goold.shop/_next/image?url=https%3A%2F%2Ffirebasestorage.googleapis.com%2Fv0%2Fb%2Fgold-spell.firebasestorage.app%2Fo%2Fproducts%252F6018029a-38ef-412f-8e7d-039a088a41a3%252Fe28380c9-f4c1-4938-9522-5e4e84c0a12b%3Falt%3Dmedia%26token%3Deaec6a16-8d1c-4611-b735-fc806d26bdd5&w=1200&q=75", link:"https://pay.goold.club/aff/M7LKWO/UH4QZD35"},
     {name:"Alisei 250ml - By Fioterapia", image:"https://goold.shop/_next/image?url=https%3A%2F%2Ffirebasestorage.googleapis.com%2Fv0%2Fb%2Fgold-spell.firebasestorage.app%2Fo%2Fproducts%252F3f1bc705-d11e-4417-a607-a0b419618625%252Fc941428a-1702-44f3-8022-10b5c5b6664e%3Falt%3Dmedia%26token%3D1bcb7052-fc50-4d17-88e0-2477b36e1eb1&w=1200&q=75", link:"https://pay.goold.club/aff/ANTK1P/UH4QZD35"},
     {name:"Shampoo Laranja Poderoso", image:"https://goold.shop/_next/image?url=https%3A%2F%2Ffirebasestorage.googleapis.com%2Fv0%2Fb%2Fgold-spell.firebasestorage.app%2Fo%2Fproducts%252F331e5b9d-f167-4747-a24b-7673775cd510%252Fbb136d5c-1070-4603-87e0-296bc96db1c0%3Falt%3Dmedia%26token%3D87ea8ec0-fb62-48f6-b8c5-6d05fad6538d&w=1200&q=75", link:"https://pay.goold.club/aff/OAMD16/UH4QZD35"},
     {name:"Liso Ético", image:"https://goold.shop/_next/image?url=https%3A%2F%2Ffirebasestorage.googleapis.com%2Fv0%2Fb%2Fgold-spell.firebasestorage.app%2Fo%2Fproducts%252Fef3e64a2-5f0c-4324-a402-f5ec1468de7a%252F1b19de28-c009-499e-a433-221df711672c%3Falt%3Dmedia%26token%3D4f8e7ddf-797f-43a4-be32-afe646dc2ed2&w=1200&q=75", link:"https://pay.goold.club/aff/NDPFYC/UH4QZD35"},
     {name:"Condy Laranja Poderoso", image:"https://goold.shop/_next/image?url=https%3A%2F%2Ffirebasestorage.googleapis.com%2Fv0%2Fb%2Fgold-spell.firebasestorage.app%2Fo%2Fproducts%252F66682edc-42ae-47cc-b420-b22603459d4c%252Fb0102e05-8b71-4b5b-82b4-15f706b5da13%3Falt%3Dmedia%26token%3D5eab82b7-f829-4af5-ba95-b5f16f2d8e0b&w=1200&q=75", link:"https://pay.goold.club/aff/1UYWHJ/UH4QZD35"}
   ],
-  moreProducts:[
-    {name:"Body Splash My Sweet Delight", image:"https://www.thebarboursbeauty.com.br/cdn/shop/files/Body_Splash_My_Sweet_Delight_Desodorante_Colonia_200ml_29a6ecc8-12b8-4b20-8db4-e1c538981bf9.png?v=1770147891&width=1000", link:"https://www.thebarboursbeauty.com.br/products/body-splash-delight-deo-colonia-6947ecad195b8"},
-    {name:"Perfume para cabelo / finalizador termoativo Very Sexy", image:"https://www.thebarboursbeauty.com.br/cdn/shop/files/Perfume_para_cabelo_finalizador_termoativo_Very_Sexy.png?v=1770146781&width=1000", link:"https://www.thebarboursbeauty.com.br/products/very-sexy-perfume-para-cabelo-694274543d28d"},
+  moreProducts: [
+    {name:"Body Splash My Sweet", image:"https://www.thebarboursbeauty.com.br/cdn/shop/files/Body_Splash_My_Sweet_Delight_Desodorante_Colonia_200ml_29a6ecc8-12b8-4b20-8db4-e1c538981bf9.png?v=1770147891&width=1000", link:"https://www.thebarboursbeauty.com.br/products/body-splash-delight-deo-colonia-6947ecad195b8"},
+    {name:"Perfume Very Sexy", image:"https://www.thebarboursbeauty.com.br/cdn/shop/files/Perfume_para_cabelo_finalizador_termoativo_Very_Sexy.png?v=1770146781&width=1000", link:"https://www.thebarboursbeauty.com.br/products/very-sexy-perfume-para-cabelo-694274543d28d"},
     {name:"Body Splash Good Graces", image: "https://www.thebarboursbeauty.com.br/cdn/shop/files/Body_Splash_Good_Graces_Desodorante_Colonia_200ml.png?v=1770147429&width=1000", link: "https://www.thebarboursbeauty.com.br/products/body-splash-good-graces-desodorante-colonia-200ml-69482a05844a2"},
-    {name:"Geleia Hidratante Desodorante Corporal My Sweet Delight", image: "https://www.thebarboursbeauty.com.br/cdn/shop/files/Geleia_Hidratante_Desodorante_Corporal_My_Sweet_Delight_200g.png?v=1770740008&width=1000", link: "https://www.thebarboursbeauty.com.br/products/geleia-hidratante-corporal-my-sweet-delight-6948182984e6d"},
-    {name:"Perfume para cabelo My Sweet Delight / finalizador termoativo", image: "https://www.thebarboursbeauty.com.br/cdn/shop/files/Perfume_para_cabelo_My_Sweet_Delight_finalizador_termoativo.png?v=1770145345&width=1000", link: "https://www.thebarboursbeauty.com.br/products/perfume-para-cabelo-delight-finalizador-termoativo-ref-olfativa-delina-694803dd48bd6"}
+    {name:"Geleia Hidratante Sweet", image: "https://www.thebarboursbeauty.com.br/cdn/shop/files/Geleia_Hidratante_Desodorante_Corporal_My_Sweet_Delight_200g.png?v=1770740008&width=1000", link: "https://www.thebarboursbeauty.com.br/products/geleia-hidratante-corporal-my-sweet-delight-6948182984e6d"},
+    {name:"Perfume Sweet Delight", image: "https://www.thebarboursbeauty.com.br/cdn/shop/files/Perfume_para_cabelo_My_Sweet_Delight_finalizador_termoativo.png?v=1770145345&width=1000", link: "https://www.thebarboursbeauty.com.br/products/perfume-para-cabelo-delight-finalizador-termoativo-ref-olfativa-delina-694803dd48bd6"}
   ],
-  socials:[
+  socials: [
     {name:"YouTube", icon:"https://cdn-icons-png.flaticon.com/512/1384/1384060.png", link:"https://www.youtube.com/@Ivana.Samara"},
     {name:"Instagram", icon:"https://cdn-icons-png.flaticon.com/512/2111/2111463.png", link:"https://www.instagram.com/ivanasamaraoficial"},
     {name:"TikTok", icon:"https://cdn-icons-png.flaticon.com/512/3046/3046126.png", link:"https://www.tiktok.com/@ivanasamara130"},
     {name:"Kwai", icon:"https://img.cdndsgni.com/preview/13791682-m.jpg", link:"https://www.kwai.com/@ivanasamara003"}
-    
   ]
 }
 
 const { createApp } = Vue;
 
 createApp({
-  data(){
-    return{ data, theme:'dark' }
-  },
-  methods:{
-    toggleTheme(){
-      this.theme = this.theme === 'dark' ? 'light' : 'dark'
-      document.body.className = this.theme
+  data() {
+    return { 
+      data, 
+      theme: 'dark',
+      effect: 'namorados', // Opções: 'none', 'saojoao', 'namorados', 'natal'
+      particles: []
     }
   },
-  mounted(){ document.body.className = this.theme },
-  template:`
-  <div class='container'>
+  computed: {
+    activeParticles() {
+      if (this.effect === 'none') return [];
+      
+      const emojis = {
+        saojoao: ['🔥', '🌽', '🌻', '🎆', '🎊'],
+        namorados: ['❤️', '💖', '💕', '💘', '💌'],
+        natal: ['❄️', '🎄', '🎁', '⭐', '⛄']
+      };
 
-    <div class='toggle' @click='toggleTheme'>🌙 / ☀️</div>
-
-    <div class='banner' :style="{backgroundImage:'url('+data.banner+')'}">
-      <div>
-        <div class='title'>{{data.name}}</div>
-        <div class='subtitle'>{{data.title}}</div>
-      </div>
-    </div>
-
-    <a class='bio-btn' :href='data.bioLink' target='_blank'>🔗 Link na Bio</a>
-
-    <div class='section'>
-      <h2>Produtos Gold Spell que uso.</h2>
-      <div class='carousel'>
-        <div class='card' v-for='p in data.products'>
-          <a :href='p.link' target='_blank'><img :src='p.image'></a>
-          <h3>{{p.name}}</h3>
-        </div>
-      </div>
-    </div>
-
-    <div class='section'>
-      <h2>Produtos Barbour's que uso.</h2>
-      <div class='carousel'>
-        <a class='card' v-for='p in data.moreProducts' :href='p.link' target='_blank'>
-          <img :src='p.image'>
-          <h3>{{p.name}}</h3>
-        </a>
-      </div>
-    </div>
-
-    <a class='whatsapp-banner' :href='data.whatsappLink' target='_blank'>
-      <img :src='data.whatsappBanner'>
-    </a>
-
-    <div class='section'>
-      <h2>Redes Sociais</h2>
-      <div class='social'>
-        <a v-for='s in data.socials' :href='s.link' target='_blank'><img :src='s.icon'> {{s.name}}</a>
-      </div>
-    </div>
-
-    <footer>
-      © 2026 - Desenvolvido por <a href='https://github.com/BlackMix' target='_blank'>Mix Dev</a>
-    </footer>
-
-  </div>
-  `
+      const currentEmojis = emojis[this.effect];
+      
+      // Gera partículas baseadas no efeito selecionado
+      return this.particles.map(p => ({
+        ...p,
+        emoji: currentEmojis[Math.floor(Math.random() * currentEmojis.length)]
+      }));
+    }
+  },
+  methods: {
+    toggleTheme() {
+      this.theme = this.theme === 'dark' ? 'light' : 'dark';
+      document.body.className = this.theme;
+    },
+    generateParticles() {
+      // Gera 35 partículas com posições, atrasos e velocidades aleatórias
+      const temp = [];
+      for (let i = 0; i < 35; i++) {
+        temp.push({
+          id: i,
+          left: Math.random() * 100, // Posição horizontal %
+          delay: Math.random() * 5, // Atraso na animação
+          duration: 4 + Math.random() * 6, // Velocidade da queda
+          size: 16 + Math.random() * 20 // Tamanho do emoji
+        });
+      }
+      this.particles = temp;
+    }
+  },
+  mounted() { 
+    document.body.className = this.theme;
+    this.generateParticles();
+  }
 }).mount('#app')
 </script>
 </body>
