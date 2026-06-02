@@ -51,7 +51,7 @@
       min-height: 100vh;
     }
 
-    /* Tela de Splash (Bem-vindos) */
+    /* Tela de Splash (Bem-vindos) - Mantém a imagem original */
     .splash-screen {
       position: fixed;
       top: 0;
@@ -173,7 +173,7 @@
       padding: 20px;
       position: relative;
       z-index: 10;
-      padding-top: 80px;
+      padding-top: 60px; /* Ajustado para menu menor */
     }
 
     a {
@@ -181,20 +181,20 @@
       color: var(--text);
     }
 
-    /* Menu de Configurações (Vidro) */
+    /* Menu de Configurações (Vidro) - MENU DIMINUÍDO */
     .config-panel {
       position: fixed;
-      top: 5px;
+      top: 10px; /* Levemente mais para baixo */
       left: 50%;
       transform: translateX(-50%);
       background: var(--card-bg);
       backdrop-filter: blur(12px);
       -webkit-backdrop-filter: blur(12px);
       border: 1px solid var(--card-border);
-      padding: 10px 20px;
-      border-radius: 30px;
+      padding: 5px 15px; /* Padding reduzido */
+      border-radius: 20px; /* Raio menor */
       display: flex;
-      gap: 15px;
+      gap: 10px; /* Espaço menor entre itens */
       align-items: center;
       z-index: 100;
       box-shadow: 0 4px 15px var(--shadow);
@@ -204,9 +204,10 @@
       background: transparent;
       border: 1px solid var(--text-muted);
       color: var(--text);
-      padding: 5px 10px;
-      border-radius: 15px;
+      padding: 3px 8px; /* Padding interno reduzido */
+      border-radius: 10px;
       font-family: 'Poppins', sans-serif;
+      font-size: 13px; /* Fonte menor */
       cursor: pointer;
       outline: none;
       transition: 0.3s;
@@ -222,12 +223,10 @@
       color: var(--text);
     }
 
-    /* Banner de Perfil */
+    /* Banner de Perfil - AGORA COM VÍDEO */
     .banner {
-      height: 700px;
+      height: 350px; /* Reduzi um pouco a altura gigante de 700px para UX melhor, ajuste se quiser */
       border-radius: 25px;
-      background-size: cover;
-      background-position: center 20%;
       position: relative;
       overflow: hidden;
       display: flex;
@@ -235,6 +234,19 @@
       padding: 30px;
       box-shadow: 0 10px 30px var(--shadow);
       animation: fadeInUp 1s ease;
+      background: #000; /* Fundo preto caso o vídeo falhe */
+    }
+
+    /* Container do Vídeo */
+    .banner-video {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover; /* Garante que o vídeo cubra a área sem distorcer */
+      z-index: 0;
+      opacity: 0.8; /* Leve transparência para combinar com o tema escuro */
     }
 
     .banner::after {
@@ -243,12 +255,12 @@
       bottom: 0; left: 0; right: 0;
       height: 60%;
       background: linear-gradient(to top, rgba(0,0,0,0.9), transparent);
-      z-index: 1;
+      z-index: 1; /* Acima do vídeo */
     }
 
     .banner-content {
       position: relative;
-      z-index: 2;
+      z-index: 2; /* Acima da sombra */
       color: white;
     }
 
@@ -449,20 +461,20 @@
     }
 
     @media (min-width: 768px) {
-      .banner { height: 700px; }
+      .banner { height: 400px; } /* Altura um pouco maior no desktop */
       .title { font-size: 48px; }
-      .container { padding-top: 100px; }
+      .container { padding-top: 80px; }
     }
   </style>
 </head>
 <body class="dark">
   <div id="app">
     
-    <!-- TELA DE BEM-VINDOS (SPLASH) -->
+    <!-- TELA DE BEM-VINDOS (SPLASH) - Mantém a foto original -->
     <div class="splash-screen" :class="{ 'fade-out': isFadingOut }" v-if="showSplash">
       <div class="splash-content">
         <div class="splash-img-wrapper">
-          <img :src="data.banner" alt="Ivana Samara">
+          <img :src="data.bannerOriginal" alt="Ivana Samara">
         </div>
         <h1 class="splash-text">Bem-Vindos!</h1>
         <div class="splash-loader"></div>
@@ -477,7 +489,7 @@
       </div>
     </div>
 
-    <!-- Painel de Configurações (Fixo no Topo) -->
+    <!-- Painel de Configurações (Fixo no Topo) - MENU DIMINUÍDO -->
     <div class="config-panel">
       <button @click="toggleTheme" title="Alternar Tema">
         {{ theme === 'dark' ? '☀️ Claro' : '🌙 Escuro' }}
@@ -492,8 +504,15 @@
 
     <div class="container">
       
-      <!-- Banner Principal -->
-      <div class="banner" :style="{ backgroundImage: 'url(' + data.banner + ')' }">
+      <!-- Banner Principal - AGORA COM VÍDEO -->
+      <div class="banner">
+        <!-- O VÍDEO ENTRA AQUI -->
+        <!-- Atributos essenciais para autoplay funcionar: autoplay, loop, muted, playsinline -->
+        <video autoplay loop muted playsinline class="banner-video">
+          <source :src="data.videoLogo" type="video/mp4">
+          Seu navegador não suporta vídeos HTML5.
+        </video>
+
         <div class="banner-content">
           <div class="title">{{ data.name }}</div>
           <div class="subtitle">{{ data.title }}</div>
@@ -561,7 +580,8 @@
 const data = {
   name: "Ivana Samara",
   title: "Influencer Digital & Beleza",
-  banner: "https://github.com/ivanasamara/ivanasamara/blob/main/ivana.png?raw=true",
+  bannerOriginal: "https://github.com/ivanasamara/ivanasamara/blob/main/ivana.png?raw=true",
+  videoLogo: "https://github.com/ivanasamara/ivanasamara/blob/main/ivana.mp4?raw=true",
   bioLink: "https://www.instagram.com/ivana_samara_oficial",
   whatsappLink: "https://chat.whatsapp.com/Gam2qpzYaJSDrkeGCNaETX?mode=gi_t",
   whatsappBanner: "https://github.com/ivanasamara/ivanasamara/blob/main/bannerivanagrupo.png?raw=true",
@@ -594,7 +614,7 @@ createApp({
     return { 
       data, 
       theme: 'dark',
-      effect: 'namorados', // Opções: 'none', 'saojoao', 'namorados', 'natal'
+      effect: 'namorados', // Opções: 'none', 'saojoao', 'namorados', 'natal'
       particles: [],
       // Controles da Splash Screen
       showSplash: true,
@@ -602,7 +622,6 @@ createApp({
     }
   },
   computed: {
-    // Duplicamos as listas de produtos para que o carrossel infinito CSS funcione perfeitamente
     infiniteProducts() {
       return [...this.data.products, ...this.data.products];
     },
@@ -645,14 +664,12 @@ createApp({
       this.particles = temp;
     },
     initSplash() {
-      // Deixa a splash na tela por 2.5 segundos, depois inicia o fade out
       setTimeout(() => {
         this.isFadingOut = true;
-        // Remove do DOM após a transição de CSS terminar (1s)
         setTimeout(() => {
           this.showSplash = false;
         }, 1000);
-      }, 2500);
+      }, 3500);
     }
   },
   mounted() { 
