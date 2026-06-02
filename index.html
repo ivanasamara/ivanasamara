@@ -51,6 +51,98 @@
       min-height: 100vh;
     }
 
+    /* Tela de Splash (Bem-vindos) */
+    .splash-screen {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: var(--bg);
+      z-index: 99999;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: opacity 1s cubic-bezier(0.4, 0, 0.2, 1), visibility 1s;
+    }
+
+    .splash-screen.fade-out {
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+    }
+
+    .splash-content {
+      text-align: center;
+      animation: popIn 1.5s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+    }
+
+    .splash-img-wrapper {
+      width: 180px;
+      height: 180px;
+      margin: 0 auto 25px auto;
+      border-radius: 50%;
+      padding: 5px;
+      background: linear-gradient(45deg, var(--accent), #ff7eb3);
+      box-shadow: 0 0 40px rgba(255, 79, 216, 0.4);
+      animation: float 3s ease-in-out infinite;
+    }
+
+    .splash-img-wrapper img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center 20%;
+      border-radius: 50%;
+      border: 4px solid var(--bg);
+    }
+
+    .splash-text {
+      font-size: 32px;
+      font-weight: 700;
+      color: var(--text);
+      text-shadow: 0 0 15px rgba(255, 79, 216, 0.5);
+      letter-spacing: 2px;
+      margin-bottom: 10px;
+    }
+
+    .splash-loader {
+      width: 50px;
+      height: 4px;
+      background: rgba(255, 255, 255, 0.2);
+      margin: 0 auto;
+      border-radius: 2px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .splash-loader::after {
+      content: '';
+      position: absolute;
+      left: -50%;
+      top: 0;
+      height: 100%;
+      width: 50%;
+      background: var(--accent);
+      animation: loading 1.5s infinite linear;
+    }
+
+    @keyframes popIn {
+      0% { transform: scale(0.8); opacity: 0; }
+      100% { transform: scale(1); opacity: 1; }
+    }
+
+    @keyframes float {
+      0% { transform: translateY(0px); }
+      50% { transform: translateY(-15px); box-shadow: 0 15px 50px rgba(255, 79, 216, 0.6); }
+      100% { transform: translateY(0px); }
+    }
+
+    @keyframes loading {
+      0% { left: -50%; }
+      100% { left: 100%; }
+    }
+
     /* Efeitos de Partículas */
     .particles-container {
       position: fixed;
@@ -81,7 +173,7 @@
       padding: 20px;
       position: relative;
       z-index: 10;
-      padding-top: 80px; /* Espaço para o menu de configurações */
+      padding-top: 80px;
     }
 
     a {
@@ -92,7 +184,7 @@
     /* Menu de Configurações (Vidro) */
     .config-panel {
       position: fixed;
-      top: 15px;
+      top: 5px;
       left: 50%;
       transform: translateX(-50%);
       background: var(--card-bg);
@@ -132,7 +224,7 @@
 
     /* Banner de Perfil */
     .banner {
-      height: 300px;
+      height: 700px;
       border-radius: 25px;
       background-size: cover;
       background-position: center 20%;
@@ -157,7 +249,7 @@
     .banner-content {
       position: relative;
       z-index: 2;
-      color: white; /* Sempre branco no banner por causa da sombra */
+      color: white;
     }
 
     .title { font-size: 36px; font-weight: 700; line-height: 1.2; text-shadow: 2px 2px 4px rgba(0,0,0,0.5); }
@@ -184,7 +276,7 @@
       box-shadow: 0 12px 25px rgba(255, 79, 216, 0.6);
     }
 
-    /* Seções e Carrosséis */
+    /* Seções e Carrossel Automático */
     .section {
       margin-top: 40px;
       animation: fadeInUp 1s ease 0.2s both;
@@ -208,18 +300,32 @@
       border-radius: 5px;
     }
 
-    .carousel {
-      display: flex;
-      overflow-x: auto;
-      gap: 15px;
-      scroll-snap-type: x mandatory;
-      padding-bottom: 15px; /* Espaço para sombra */
+    /* Nova Estrutura de Carrossel Infinito */
+    .carousel-wrapper {
+      overflow: hidden;
+      width: 100%;
+      padding: 10px 0 20px 0;
+      position: relative;
     }
 
-    /* Esconder Scrollbar mas manter funcionalidade */
-    .carousel::-webkit-scrollbar { height: 6px; }
-    .carousel::-webkit-scrollbar-track { background: transparent; }
-    .carousel::-webkit-scrollbar-thumb { background: var(--card-border); border-radius: 10px; }
+    .carousel-track {
+      display: flex;
+      gap: 15px;
+      width: max-content;
+      /* A animação faz a trilha deslizar continuamente */
+      animation: scrollTrack 20s linear infinite;
+    }
+
+    /* Pausa a animação quando o usuário passa o mouse ou o dedo por cima */
+    .carousel-track:hover {
+      animation-play-state: paused;
+    }
+
+    @keyframes scrollTrack {
+      0% { transform: translateX(0); }
+      /* Move exatamente 50% (uma volta completa dos itens originais) */
+      100% { transform: translateX(calc(-50% - 7.5px)); }
+    }
 
     .card {
       min-width: 200px;
@@ -231,7 +337,6 @@
       padding: 15px;
       border-radius: 20px;
       text-align: center;
-      scroll-snap-align: start;
       transition: all 0.3s ease;
       display: flex;
       flex-direction: column;
@@ -331,7 +436,7 @@
       font-weight: bold;
     }
 
-    /* Keyframes */
+    /* Keyframes Extras */
     @keyframes fadeInUp {
       from { opacity: 0; transform: translateY(30px); }
       to { opacity: 1; transform: translateY(0); }
@@ -344,7 +449,7 @@
     }
 
     @media (min-width: 768px) {
-      .banner { height: 700px; }
+      .banner { height: 400px; }
       .title { font-size: 48px; }
       .container { padding-top: 100px; }
     }
@@ -352,6 +457,18 @@
 </head>
 <body class="dark">
   <div id="app">
+    
+    <!-- TELA DE BEM-VINDOS (SPLASH) -->
+    <div class="splash-screen" :class="{ 'fade-out': isFadingOut }" v-if="showSplash">
+      <div class="splash-content">
+        <div class="splash-img-wrapper">
+          <img :src="data.banner" alt="Ivana Samara">
+        </div>
+        <h1 class="splash-text">Bem-Vindos!</h1>
+        <div class="splash-loader"></div>
+      </div>
+    </div>
+
     <!-- Overlay de Partículas Sazonais -->
     <div class="particles-container" v-if="effect !== 'none'">
       <div v-for="p in activeParticles" :key="p.id" class="particle" 
@@ -388,25 +505,30 @@
         🔗 Conheça meu Instagram
       </a>
 
-      <!-- Seção 1 -->
+      <!-- Seção 1 com Carrossel Automático (Marquee) -->
       <div class="section">
         <h2>Produtos Gold Spell</h2>
-        <div class="carousel">
-          <a class="card" v-for="p in data.products" :key="p.name" :href="p.link" target="_blank">
-            <img :src="p.image" :alt="p.name">
-            <h3>{{ p.name }}</h3>
-          </a>
+        <div class="carousel-wrapper">
+          <div class="carousel-track">
+            <!-- Renderizamos os produtos duas vezes para o efeito infinito funcionar sem quebras -->
+            <a class="card" v-for="(p, index) in infiniteProducts" :key="'p1-' + index" :href="p.link" target="_blank">
+              <img :src="p.image" :alt="p.name">
+              <h3>{{ p.name }}</h3>
+            </a>
+          </div>
         </div>
       </div>
 
-      <!-- Seção 2 -->
+      <!-- Seção 2 com Carrossel Automático (Marquee) -->
       <div class="section">
         <h2>Linha Barbour's Beauty</h2>
-        <div class="carousel">
-          <a class="card" v-for="p in data.moreProducts" :key="p.name" :href="p.link" target="_blank">
-            <img :src="p.image" :alt="p.name">
-            <h3>{{ p.name }}</h3>
-          </a>
+        <div class="carousel-wrapper">
+          <div class="carousel-track" style="animation-direction: reverse; animation-duration: 25s;"> <!-- Efeito invertido para dar dinâmica -->
+            <a class="card" v-for="(p, index) in infiniteMoreProducts" :key="'p2-' + index" :href="p.link" target="_blank">
+              <img :src="p.image" :alt="p.name">
+              <h3>{{ p.name }}</h3>
+            </a>
+          </div>
         </div>
       </div>
 
@@ -472,11 +594,21 @@ createApp({
     return { 
       data, 
       theme: 'dark',
-      effect: 'namorados', // Opções: 'none', 'saojoao', 'namorados', 'natal'
-      particles: []
+      effect: 'none', 
+      particles: [],
+      // Controles da Splash Screen
+      showSplash: true,
+      isFadingOut: false
     }
   },
   computed: {
+    // Duplicamos as listas de produtos para que o carrossel infinito CSS funcione perfeitamente
+    infiniteProducts() {
+      return [...this.data.products, ...this.data.products];
+    },
+    infiniteMoreProducts() {
+      return [...this.data.moreProducts, ...this.data.moreProducts];
+    },
     activeParticles() {
       if (this.effect === 'none') return [];
       
@@ -488,7 +620,6 @@ createApp({
 
       const currentEmojis = emojis[this.effect];
       
-      // Gera partículas baseadas no efeito selecionado
       return this.particles.map(p => ({
         ...p,
         emoji: currentEmojis[Math.floor(Math.random() * currentEmojis.length)]
@@ -501,23 +632,33 @@ createApp({
       document.body.className = this.theme;
     },
     generateParticles() {
-      // Gera 35 partículas com posições, atrasos e velocidades aleatórias
       const temp = [];
       for (let i = 0; i < 35; i++) {
         temp.push({
           id: i,
-          left: Math.random() * 100, // Posição horizontal %
-          delay: Math.random() * 5, // Atraso na animação
-          duration: 4 + Math.random() * 6, // Velocidade da queda
-          size: 16 + Math.random() * 20 // Tamanho do emoji
+          left: Math.random() * 100, 
+          delay: Math.random() * 5, 
+          duration: 4 + Math.random() * 6, 
+          size: 16 + Math.random() * 20 
         });
       }
       this.particles = temp;
+    },
+    initSplash() {
+      // Deixa a splash na tela por 2.5 segundos, depois inicia o fade out
+      setTimeout(() => {
+        this.isFadingOut = true;
+        // Remove do DOM após a transição de CSS terminar (1s)
+        setTimeout(() => {
+          this.showSplash = false;
+        }, 1000);
+      }, 2500);
     }
   },
   mounted() { 
     document.body.className = this.theme;
     this.generateParticles();
+    this.initSplash();
   }
 }).mount('#app')
 </script>
