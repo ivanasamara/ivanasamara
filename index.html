@@ -578,6 +578,7 @@
   </div>
 
 <script>
+<script>
 const data = {
   name: "Ivana Samara",
   title: "Influencer Digital & Beleza",
@@ -614,10 +615,9 @@ createApp({
   data() {
     return { 
       data, 
-      theme: 'dark',
-      effect: 'copa', // Opções: 'none', 'saojoao', 'namorados', 'natal'
+      theme: 'dark', 
+      effect: 'none', // Opções: 'none', 'copa', 'saojoao', 'namorados', 'natal'
       particles: [],
-      // Controles da Splash Screen
       showSplash: true,
       isFadingOut: false
     }
@@ -652,7 +652,30 @@ createApp({
       this.theme = this.theme === 'dark' ? 'light' : 'dark';
       document.body.className = this.theme;
     },
+    getSeasonalEffect() {
+      const today = new Date();
+      const month = today.getMonth() + 1;
+      const day = today.getDate();
+      const currentDate = (month * 100) + day;
+
+      const periods = [
+        { name: 'namorados', start: 601, end: 612 },
+        { name: 'saojoao', start: 613, end: 630 },
+        { name: 'copa', start: 611, end: 719 },
+        { name: 'natal', start: 1201, end: 1231 },
+      ];
+
+      for (const period of periods) {
+        if (currentDate >= period.start && currentDate <= period.end) {
+          return period.name;
+        }
+      }
+
+      return 'none';
+    },
     generateParticles() {
+      if (this.effect === 'none') return;
+
       const temp = [];
       for (let i = 0; i < 35; i++) {
         temp.push({
@@ -676,6 +699,7 @@ createApp({
   },
   mounted() { 
     document.body.className = this.theme;
+    this.effect = this.getSeasonalEffect();
     this.generateParticles();
     this.initSplash();
   }
