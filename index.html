@@ -496,6 +496,7 @@
       </button>
       <select v-model="effect" title="Escolha um Efeito">
         <option value="none">✨ Sem Efeito</option>
+        <option value="copa">⚽ Copa</option>
         <option value="saojoao">🔥 São João</option>
         <option value="namorados">💘 Namorados</option>
         <option value="natal">❄️ Natal</option>
@@ -614,7 +615,7 @@ createApp({
     return { 
       data, 
       theme: 'dark',
-      effect: 'saojoao', // Opções: 'none', 'saojoao', 'namorados', 'natal'
+      effect: 'copa', // Opções: 'none', 'saojoao', 'namorados', 'natal'
       particles: [],
       // Controles da Splash Screen
       showSplash: true,
@@ -634,7 +635,8 @@ createApp({
       const emojis = {
         saojoao: ['🔥', '🌽', '🌻', '🎆', '🎊'],
         namorados: ['❤️', '💖', '💕', '💘', '💌'],
-        natal: ['❄️', '🎄', '🎁', '⭐', '⛄']
+        natal: ['❄️', '🎄', '🎁', '⭐', '⛄'],
+        copa: ['⚽', '🏆', '🥅', '🇧🇷', '🎉']
       };
 
       const currentEmojis = emojis[this.effect];
