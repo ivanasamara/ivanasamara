@@ -601,7 +601,13 @@
 
       <!-- Seção 2 com Carrossel Automático (Marquee) -->
       <div class="section">
-        <h2>Linha Barbour's Beauty</h2>
+        <h2>Produtos Barbour's Beauty</h2>
+        <div class="discount-container">
+          <div class="discount-label pulse-effect">🎁 CUPOM de Desconto 10% OFF</div>
+          <button @click="copyDiscountCodeBarbours" class="copy-btn">
+            {{ copyTextBarbours }}
+          </button>
+        </div>
         <div class="carousel-wrapper">
           <div class="carousel-track" style="animation-direction: reverse; animation-duration: 25s;"> <!-- Efeito invertido para dar dinâmica -->
             <a class="card" v-for="(p, index) in infiniteMoreProducts" :key="'p2-' + index" :href="p.link" target="_blank">
@@ -688,7 +694,9 @@ createApp({
       showSplash: true,
       isFadingOut: false,
       copyText: '📋 Copiar Código: UH4QZD35',
-      code: 'UH4QZD35'
+      copyTextBarbours: '📋 Copiar CUPOM: IVANA',
+      code: 'UH4QZD35',
+      cupom: 'IVANA'
     }
   },
   computed: {
@@ -720,9 +728,18 @@ createApp({
     copyDiscountCode() {
       navigator.clipboard.writeText(this.code).then(() => {
         this.copyText = '✅ Código Copiado!';
-        // Retorna ao texto original após 2 segundos
         setTimeout(() => {
           this.copyText = '📋 Copiar Código: UH4QZD35';
+        }, 2000);
+      }).catch(err => {
+        console.error('Falha ao copiar: ', err);
+      });
+    },
+    copyDiscountCodeBarbours() {
+      navigator.clipboard.writeText(this.cupom).then(() => {
+        this.copyTextBarbours = '✅ CUPOM Copiado!';
+        setTimeout(() => {
+          this.copyTextBarbours = '📋 Copiar CUPOM: IVANA';
         }, 2000);
       }).catch(err => {
         console.error('Falha ao copiar: ', err);
