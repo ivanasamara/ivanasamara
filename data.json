@@ -1,0 +1,41 @@
+{
+  "profile": {
+    "name": "Ivana Samara",
+    "title": "Influencer Digital & Beleza",
+    "bioText": "Bem-vinda ao meu espaço! Sou apaixonada por criar conteúdo que realça a beleza e a autoestima. Aqui você encontra meus produtos favoritos, dicas de cuidados e um pouco da minha rotina. Sinta-se em casa!",
+    "email": "contato.ivanasamara@gmail.com",
+    "bioLink": "https://www.instagram.com/ivanasamaraoficial",
+    "bioImages": [
+      "https://github.com/ivanasamara/ivanasamara/blob/main/ivana.png?raw=true",
+      "https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?auto=format&fit=crop&w=300&q=80"
+    ]
+  },
+  "assets": {
+    "bannerOriginal": "https://github.com/ivanasamara/ivanasamara/blob/main/ivana.png?raw=true",
+    "videoLogo": "https://github.com/ivanasamara/ivanasamara/blob/main/ivana.mp4?raw=true",
+    "whatsappLink": "https://chat.whatsapp.com/Gam2qpzYaJSDrkeGCNaETX?mode=gi_t",
+    "whatsappBanner": "https://github.com/ivanasamara/ivanasamara/blob/main/bannerivanagrupo.png?raw=true"
+  },
+  "config": {
+    "discountCode": "UH4QZD35",
+    "discountCodeBarbours": "IVANA"
+  },
+  "products": [
+    { "name": "Tônico Poderoso - 250ml", "image": "https://www.goold.shop/_next/image?url=https%3A%2F%2Ffirebasestorage.googleapis.com%2Fv0%2Fb%2Fgold-spell.firebasestorage.app%2Fo%2Fproducts%252Fb5d200da-8978-4612-8d54-f54bbe41e406%252F10ee099e-b6ea-473e-a007-2701a9a75161%3Falt%3Dmedia%26token%3Dc1ccd791-98e2-420e-b25a-20c3a845d688&w=640&q=85", "link": "https://pay.goold.club/aff/MMAMZ6/UH4QZD35" },
+    { "name": "Mask Poderosa Laranja Power", "image": "https://goold.shop/_next/image?url=https%3A%2F%2Ffirebasestorage.googleapis.com%2Fv0%2Fb%2Fgold-spell.firebasestorage.app%2Fo%2Fproducts%252F6881e73a-902d-4153-97e6-f549dcf0af22%252Fd28b8136-ba89-4b1c-aafa-7649169608ea%3Falt%3Dmedia%26token%3Dd18f1ab7-026f-47b2-8171-2590cf934c32&w=640&q=85", "link": "https://pay.goold.club/aff/5XIYCV/UH4QZD35" },
+    { "name": "Shampoo e Condy turbo DNAPLEX", "image": "https://goold.shop/_next/image?url=https%3A%2F%2Ffirebasestorage.googleapis.com%2Fv0%2Fb%2Fgold-spell.firebasestorage.app%2Fo%2Fproducts%252Fe3c0f944-e98b-4c51-802e-61bb27f6f085%252Fc5c78161-99eb-47ae-b7be-b4e213a4d5a3%3Falt%3Dmedia%26token%3Dfa20cad3-ed8a-4d46-a931-453ba0cf7556&w=640&q=85", "link": "https://pay.goold.club/aff/NLKQ65/UH4QZD35" },
+    { "name": "Mask Turbo Repair DNAPLEX", "image": "https://goold.shop/_next/image?url=https%3A%2F%2Ffirebasestorage.googleapis.com%2Fv0%2Fb%2Fgold-spell.firebasestorage.app%2Fo%2Fproducts%252F4fef920e-a9b8-4772-811b-98d93dbabb75%252Faba021ca-02dd-479f-afef-9ae5dcfcd558%3Falt%3Dmedia%26token%3Dab3b3233-3b36-4d11-b8b5-d325df296be5&w=640&q=85", "link": "https://pay.goold.club/aff/KY10YL/UH4QZD35" },
+    { "name": "Alisei 250ml - By Fioterapia", "image": "https://goold.shop/_next/image?url=https%3A%2F%2Ffirebasestorage.googleapis.com%2Fv0%2Fb%2Fgold-spell.firebasestorage.app%2Fo%2Fproducts%252F3f1bc705-d11e-4417-a607-a0b419618625%252Fc941428a-1702-44f3-8022-10b5c5b6664e%3Falt%3Dmedia%26token%3D1bcb7052-fc50-4d17-88e0-2477b36e1eb1&w=1200&q=75", "link": "https://pay.goold.club/aff/ANTK1P/UH4QZD35" }
+  ],
+  "moreProducts": [
+    { "name": "Body Splash My Sweet", "image": "https://www.thebarboursbeauty.com.br/cdn/shop/files/Body_Splash_My_Sweet_Delight_Desodorante_Colonia_200ml_29a6ecc8-12b8-4b20-8db4-e1c538981bf9.png?v=1770147891&width=1000", "link": "https://www.thebarboursbeauty.com.br/products/body-splash-delight-deo-colonia-6947ecad195b8" },
+    { "name": "Perfume Very Sexy", "image": "https://www.thebarboursbeauty.com.br/cdn/shop/files/Perfume_para_cabelo_finalizador_termoativo_Very_Sexy.png?v=1770146781&width=1000", "link": "https://www.thebarboursbeauty.com.br/products/very-sexy-perfume-para-cabelo-694274543d28d" },
+    { "name": "Body Splash Good Graces", "image": "https://www.thebarboursbeauty.com.br/cdn/shop/files/Body_Splash_Good_Graces_Desodorante_Colonia_200ml.png?v=1770147429&width=1000", "link": "https://www.thebarboursbeauty.com.br/products/body-splash-good-graces-desodorante-colonia-200ml-69482a05844a2" }
+  ],
+  "socials": [
+    { "name": "YouTube", "icon": "https://cdn-icons-png.flaticon.com/512/1384/1384060.png", "link": "https://www.youtube.com/@Ivana.Samara" },
+    { "name": "Instagram", "icon": "https://cdn-icons-png.flaticon.com/512/2111/2111463.png", "link": "https://www.instagram.com/ivanasamaraoficial" },
+    { "name": "TikTok", "icon": "https://cdn-icons-png.flaticon.com/512/3046/3046126.png", "link": "https://www.tiktok.com/@ivanasamara130" },
+    { "name": "Kwai", "icon": "https://img.cdndsgni.com/preview/13791682-m.jpg", "link": "https://www.kwai.com/@ivanasamara003" }
+  ]
+}
