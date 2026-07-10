@@ -435,6 +435,60 @@
       filter: brightness(0) invert(1);
     }
 
+    /* Container do Desconto */
+.discount-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 20px;
+  gap: 12px;
+}
+
+/* Label de 10% OFF chamativa */
+.discount-label {
+  background: linear-gradient(90deg, #ff8a00, #e52e71);
+  color: white;
+  padding: 6px 16px;
+  border-radius: 20px;
+  font-weight: bold;
+  font-size: 14px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  box-shadow: 0 4px 15px rgba(229, 46, 113, 0.4);
+}
+
+/* Efeito de "Pulso" para chamar a atenção */
+.pulse-effect {
+  animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+  100% { transform: scale(1); }
+}
+
+/* Botão de Copiar */
+.copy-btn {
+  background-color: #ffffff;
+  color: #333333;
+  border: 2px dashed #e52e71;
+  padding: 12px 24px;
+  border-radius: 12px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  width: 90%;
+  max-width: 300px;
+}
+
+.copy-btn:hover {
+  background-color: #fff0f5;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
     /* Footer */
     footer {
       text-align: center;
@@ -537,6 +591,13 @@
             </a>
           </div>
         </div>
+
+        <div class="discount-container">
+          <div class="discount-label pulse-effect">🎁 Código de Desconto 10% OFF</div>
+          <button @click="copyDiscountCode" class="copy-btn">
+            {{ copyText }}
+          </button>
+        </div>
       </div>
 
       <!-- Seção 2 com Carrossel Automático (Marquee) -->
@@ -618,7 +679,9 @@ createApp({
       effect: 'none', // Opções: 'none', 'copa', 'saojoao', 'namorados', 'natal'
       particles: [],
       showSplash: true,
-      isFadingOut: false
+      isFadingOut: false,
+      copyText: '📋 Copiar Código: UH4QZD35',
+      code: 'UH4QZD35'
     }
   },
   computed: {
@@ -647,6 +710,17 @@ createApp({
     }
   },
   methods: {
+    copyDiscountCode() {
+      navigator.clipboard.writeText(this.code).then(() => {
+        this.copyText = '✅ Código Copiado!';
+        // Retorna ao texto original após 2 segundos
+        setTimeout(() => {
+          this.copyText = '📋 Copiar Código: UH4QZD35';
+        }, 2000);
+      }).catch(err => {
+        console.error('Falha ao copiar: ', err);
+      });
+    },
     toggleTheme() {
       this.theme = this.theme === 'dark' ? 'light' : 'dark';
       document.body.className = this.theme;
