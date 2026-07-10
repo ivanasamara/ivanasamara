@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ivana Samara | Links</title>
+  
+  <!-- Fontes -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- Vue 3 -->
+  <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+  
+  <style>
+    :root {
+      --bg: #0f0f1a;
+      --card-bg: rgba(30, 30, 47, 0.6);
+      --card-border: rgba(255, 255, 255, 0.1);
+      --text: #ffffff;
+      --text-muted: #b3b3b3;
+      --accent: #ff4fd8;
+      --accent-hover: #e03bc0;
+      --shadow: rgba(0, 0, 0, 0.3);
+      --glass-blur: blur(16px);
+    }
+
+    body.light {
+      --bg: #f8f9fa;
+      --card-bg: rgba(255, 255, 255, 0.7);
+      --card-border: rgba(0, 0, 0, 0.08);
+      --text: #1a1a1a;
+      --text-muted: #555555;
+      --accent: #ff4fd8;
+      --accent-hover: #e03bc0;
+      --shadow: rgba(0, 0, 0, 0.08);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      transition: background 0.4s ease, color 0.4s ease;
+      overflow-x: hidden;
+      min-height: 100vh;
+    }
+
+    a { text-decoration: none; color: var(--text); }
+
+    /* Loader Principal */
+    .initial-loader {
+      position: fixed;
+      inset: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: var(--bg);
+      z-index: 999999;
+      color: var(--accent);
+      font-size: 24px;
+      font-weight: bold;
+    }
+
+    /* Tela Splash */
+    .splash-screen {
+      position: fixed;
+      inset: 0;
+      background: var(--bg);
+      z-index: 99999;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: opacity 1s cubic-bezier(0.4, 0, 0.2, 1), visibility 1s;
+    }
+    .splash-screen.fade-out { opacity: 0; visibility: hidden; pointer-events: none; }
+    
+    .splash-img-wrapper {
+      width: 180px; height: 180px;
+      margin: 0 auto 25px auto;
+      border-radius: 50%; padding: 5px;
+      background: linear-gradient(45deg, var(--accent), #ff7eb3);
+      box-shadow: 0 0 40px rgba(255, 79, 216, 0.4);
+      animation: float 3s ease-in-out infinite;
+    }
+    .splash-img-wrapper img {
+      width: 100%; height: 100%;
+      object-fit: cover; border-radius: 50%;
+      border: 4px solid var(--bg);
+    }
+    .splash-text { font-size: 32px; font-weight: 700; text-shadow: 0 0 15px rgba(255,79,216,0.5); margin-bottom: 10px; text-align: center; }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-15px); box-shadow: 0 15px 50px rgba(255, 79, 216, 0.6); }
+    }
+
+    /* Container Principal */
+    .container {
+      max-width: 800px; margin: auto; padding: 20px;
+      position: relative; z-index: 10; padding-top: 70px;
+    }
+
+    /* Config Panel (Glassmorphism) */
+    .config-panel {
+      position: fixed; top: 15px; left: 50%;
+      transform: translateX(-50%);
+      background: var(--card-bg);
+      backdrop-filter: var(--glass-blur);
+      -webkit-backdrop-filter: var(--glass-blur);
+      border: 1px solid var(--card-border);
+      padding: 8px 20px; border-radius: 30px;
+      display: flex; gap: 15px; align-items: center;
+      z-index: 100; box-shadow: 0 8px 32px var(--shadow);
+    }
+    .config-panel select, .config-panel button {
+      background: transparent; border: 1px solid var(--text-muted);
+      color: var(--text); padding: 5px 12px;
+      border-radius: 12px; font-family: 'Poppins', sans-serif;
+      font-size: 13px; cursor: pointer; transition: 0.3s;
+      outline: none;
+    }
+    .config-panel select:hover, .config-panel button:hover {
+      border-color: var(--accent); color: var(--accent);
+    }
+    .config-panel select option { background: var(--bg); color: var(--text); }
+
+    /* Banner Video */
+    .banner {
+      height: 60vh; min-height: 400px;
+      border-radius: 25px; position: relative;
+      overflow: hidden; display: flex; align-items: flex-end;
+      padding: 30px; box-shadow: 0 10px 30px var(--shadow);
+      background: #000; animation: fadeInUp 1s ease;
+    }
+    .banner-video {
+      position: absolute; top: 0; left: 0;
+      width: 100%; height: 100%; object-fit: cover;
+      opacity: 0.75; z-index: 0;
+    }
+    .banner::after {
+      content: ''; position: absolute; bottom: 0; left: 0; right: 0;
+      height: 70%; background: linear-gradient(to top, rgba(0,0,0,0.95), transparent);
+      z-index: 1;
+    }
+    .banner-content { position: relative; z-index: 2; color: white; }
+    .title { font-size: clamp(2rem, 5vw, 3.5rem); font-weight: 700; line-height: 1.1; }
+    .subtitle { font-size: 1.1rem; opacity: 0.9; margin-top: 5px; font-weight: 300; }
+
+    /* Nova Seção: Bio */
+    .bio-section {
+      margin-top: 40px; padding: 30px;
+      background: var(--card-bg);
+      backdrop-filter: var(--glass-blur);
+      border: 1px solid var(--card-border);
+      border-radius: 25px;
+      box-shadow: 0 10px 30px var(--shadow);
+      display: flex; flex-direction: column; gap: 20px;
+      animation: fadeInUp 1s ease 0.1s both;
+    }
+    .bio-header { display: flex; align-items: center; gap: 15px; }
+    .bio-header h2 { font-size: 24px; }
+    .bio-text { font-size: 15px; line-height: 1.6; color: var(--text-muted); }
+    .bio-images {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 15px;
+    }
+    .bio-images img {
+      width: 100%; height: 160px; object-fit: cover;
+      border-radius: 15px; transition: transform 0.4s ease;
+    }
+    .bio-images img:hover { transform: scale(1.05); }
+
+    /* Nova Seção: Contato */
+    .contact-card {
+      background: linear-gradient(135deg, rgba(255,79,216,0.1), rgba(30,30,47,0.6));
+      border: 1px solid var(--accent);
+      padding: 25px; border-radius: 20px;
+      text-align: center; margin-top: 40px;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      animation: fadeInUp 1s ease 0.5s both;
+    }
+    .contact-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 25px rgba(255, 79, 216, 0.2);
+    }
+    .contact-card h2 { margin-bottom: 10px; font-size: 22px; }
+    .contact-card p { color: var(--text-muted); margin-bottom: 20px; font-size: 14px; }
+    .contact-btn {
+      display: inline-flex; align-items: center; gap: 10px;
+      background: var(--accent); color: white;
+      padding: 12px 25px; border-radius: 30px;
+      font-weight: 600; text-decoration: none;
+      transition: background 0.3s;
+    }
+    .contact-btn:hover { background: var(--accent-hover); }
+
+    /* Botão Principal Destaque */
+    .main-btn {
+      display: block; text-align: center;
+      background: linear-gradient(45deg, var(--accent), #ff7eb3);
+      padding: 18px; border-radius: 20px; margin: 30px 0;
+      color: #fff; font-weight: 600; font-size: 18px;
+      box-shadow: 0 8px 20px rgba(255, 79, 216, 0.3);
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+    .main-btn:hover { transform: translateY(-3px); box-shadow: 0 12px 25px rgba(255, 79, 216, 0.5); }
+
+    /* Títulos de Seção Genéricos */
+    .section-title {
+      font-size: 22px; margin: 40px 0 20px 0;
+      display: flex; align-items: center; gap: 10px;
+      animation: fadeInUp 1s ease 0.2s both;
+    }
+    .section-title::before {
+      content: ''; display: inline-block; width: 6px; height: 24px;
+      background: var(--accent); border-radius: 6px;
+    }
+
+    /* Sistema de Descontos */
+    .discount-container {
+      display: flex; flex-direction: column; align-items: center; gap: 12px; margin-bottom: 20px;
+      animation: fadeInUp 1s ease 0.3s both;
+    }
+    .discount-label {
+      background: linear-gradient(90deg, #ff8a00, #e52e71);
+      color: white; padding: 6px 16px; border-radius: 20px;
+      font-weight: bold; font-size: 13px; text-transform: uppercase;
+      box-shadow: 0 4px 15px rgba(229, 46, 113, 0.3);
+      animation: pulse 2s infinite;
+    }
+    .copy-btn {
+      background: transparent; color: var(--text);
+      border: 2px dashed var(--accent);
+      padding: 12px 24px; border-radius: 12px;
+      font-size: 15px; font-weight: bold;
+      cursor: pointer; transition: 0.3s; width: 100%; max-width: 320px;
+    }
+    .copy-btn:hover { background: rgba(255, 79, 216, 0.1); }
+
+    /* Carrossel CSS puro (Infinito) */
+    .carousel-wrapper {
+      overflow: hidden; width: 100%; padding: 10px 0 20px 0;
+      mask-image: linear-gradient(to right, transparent, black 5%, black 95%, transparent);
+      -webkit-mask-image: linear-gradient(to right, transparent, black 5%, black 95%, transparent);
+    }
+    .carousel-track {
+      display: flex; gap: 15px; width: max-content;
+      animation: scrollTrack 25s linear infinite;
+    }
+    .carousel-track:hover { animation-play-state: paused; }
+    
+    @keyframes scrollTrack {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(calc(-50% - 7.5px)); }
+    }
+
+    /* Cards de Produto */
+    .card {
+      width: 180px; flex-shrink: 0;
+      background: var(--card-bg); backdrop-filter: var(--glass-blur);
+      border: 1px solid var(--card-border);
+      padding: 12px; border-radius: 20px;
+      text-align: center; display: flex; flex-direction: column;
+      transition: 0.3s ease;
+    }
+    .card:hover { transform: translateY(-8px); border-color: var(--accent); box-shadow: 0 10px 20px var(--shadow); }
+    .card img { width: 100%; height: 160px; object-fit: cover; border-radius: 12px; margin-bottom: 12px; }
+    .card h3 { font-size: 13px; font-weight: 500; }
+
+    /* WhatsApp Banner */
+    .whatsapp-banner {
+      display: block; margin: 40px 0; border-radius: 20px; overflow: hidden;
+      box-shadow: 0 10px 25px var(--shadow); transition: 0.4s;
+    }
+    .whatsapp-banner img { width: 100%; display: block; border-radius: 20px; }
+    .whatsapp-banner:hover { transform: scale(1.02); }
+
+    /* Redes Sociais */
+    .social-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 15px;
+    }
+    .social-card {
+      background: var(--card-bg); border: 1px solid var(--card-border);
+      padding: 15px; border-radius: 15px;
+      display: flex; align-items: center; justify-content: center; gap: 10px;
+      font-weight: 500; font-size: 14px; transition: 0.3s;
+    }
+    .social-card img { width: 22px; height: 22px; }
+    .social-card:hover {
+      background: var(--accent); color: white; transform: translateY(-4px);
+    }
+    .social-card:hover img { filter: brightness(0) invert(1); }
+
+    /* Partículas Sazonais */
+    .particles-container { position: fixed; inset: 0; pointer-events: none; z-index: 9999; overflow: hidden; }
+    .particle { position: absolute; top: -10%; animation: fall linear infinite; opacity: 0.8; }
+    
+    @keyframes fall {
+      0% { transform: translateY(-10vh) rotate(0deg); opacity: 1; }
+      100% { transform: translateY(110vh) rotate(360deg); opacity: 0; }
+    }
+    @keyframes pulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.05); } }
+    @keyframes fadeInUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+
+    footer { text-align: center; margin: 60px 0 30px; font-size: 13px; color: var(--text-muted); }
+    footer a { color: var(--accent); font-weight: bold; }
+  </style>
+</head>
+<body class="dark">
+  <div id="app">
+    
+    <!-- Loader enquanto o JSON não é resolvido -->
+    <div v-if="!dataLoaded" class="initial-loader">Carregando...</div>
+
+    <template v-else>
+      <!-- Tela de Splash -->
+      <div class="splash-screen" :class="{ 'fade-out': !showSplash }">
+        <div>
+          <div class="splash-img-wrapper">
+            <img :src="siteData.assets.bannerOriginal" :alt="siteData.profile.name">
+          </div>
+          <h1 class="splash-text">Bem-Vindos!</h1>
+        </div>
+      </div>
+
+      <!-- Sistema de Partículas -->
+      <div class="particles-container" v-if="effect !== 'none'">
+        <div v-for="p in activeParticles" :key="p.id" class="particle" 
+             :style="{ left: p.left + '%', animationDelay: p.delay + 's', animationDuration: p.duration + 's', fontSize: p.size + 'px' }">
+          {{ p.emoji }}
+        </div>
+      </div>
+
+      <!-- Menu de Configuração -->
+      <div class="config-panel">
+        <button @click="toggleTheme">{{ theme === 'dark' ? '☀️ Claro' : '🌙 Escuro' }}</button>
+        <select v-model="effect">
+          <option value="none">✨ Sem Efeito</option>
+          <option value="copa">⚽ Copa</option>
+          <option value="saojoao">🔥 São João</option>
+          <option value="namorados">💘 Namorados</option>
+          <option value="natal">❄️ Natal</option>
+        </select>
+      </div>
+
+      <div class="container">
+        <!-- Banner de Vídeo -->
+        <div class="banner">
+          <video autoplay loop muted playsinline class="banner-video">
+            <source :src="siteData.assets.videoLogo" type="video/mp4">
+          </video>
+          <div class="banner-content">
+            <div class="title">{{ siteData.profile.name }}</div>
+            <div class="subtitle">{{ siteData.profile.title }}</div>
+          </div>
+        </div>
+
+        <!-- Nova Área: Biografia e Apresentação -->
+        <div class="bio-section">
+          <div class="bio-header">
+            <h2>Sobre Mim</h2>
+          </div>
+          <p class="bio-text">{{ siteData.profile.bioText }}</p>
+          <div class="bio-images" v-if="siteData.profile.bioImages && siteData.profile.bioImages.length">
+            <img v-for="(img, idx) in siteData.profile.bioImages" :key="idx" :src="img" alt="Foto Biografia">
+          </div>
+        </div>
+
+        <!-- Botão Call to Action Principal -->
+        <a class="main-btn" :href="siteData.profile.bioLink" target="_blank">
+          🔗 Conheça meu Instagram
+        </a>
+
+        <!-- Produtos Gold Spell -->
+        <h2 class="section-title">Produtos Gold Spell</h2>
+        <div class="discount-container">
+          <div class="discount-label">🎁 Código de Desconto 10% OFF</div>
+          <button @click="copyCode('discountCode', copyStates.gold)" class="copy-btn">
+            {{ copyStates.gold.text }}
+          </button>
+        </div>
+        <div class="carousel-wrapper">
+          <div class="carousel-track">
+            <a class="card" v-for="(p, index) in infiniteList(siteData.products)" :key="'gs-'+index" :href="p.link" target="_blank">
+              <img :src="p.image" :alt="p.name">
+              <h3>{{ p.name }}</h3>
+            </a>
+          </div>
+        </div>
+
+        <!-- Produtos Barbour's -->
+        <h2 class="section-title">Produtos Barbour's Beauty</h2>
+        <div class="discount-container">
+          <div class="discount-label">🎁 CUPOM de Desconto 10% OFF</div>
+          <button @click="copyCode('discountCodeBarbours', copyStates.barbours)" class="copy-btn">
+            {{ copyStates.barbours.text }}
+          </button>
+        </div>
+        <div class="carousel-wrapper">
+          <div class="carousel-track" style="animation-direction: reverse; animation-duration: 30s;">
+            <a class="card" v-for="(p, index) in infiniteList(siteData.moreProducts)" :key="'bb-'+index" :href="p.link" target="_blank">
+              <img :src="p.image" :alt="p.name">
+              <h3>{{ p.name }}</h3>
+            </a>
+          </div>
+        </div>
+
+        <!-- Banner WhatsApp -->
+        <a class="whatsapp-banner" :href="siteData.assets.whatsappLink" target="_blank">
+          <img :src="siteData.assets.whatsappBanner" alt="Grupo VIP WhatsApp">
+        </a>
+
+        <!-- Redes Sociais -->
+        <h2 class="section-title">Minhas Redes</h2>
+        <div class="social-grid">
+          <a class="social-card" v-for="s in siteData.socials" :key="s.name" :href="s.link" target="_blank">
+            <img :src="s.icon" :alt="s.name"> 
+            <span>{{ s.name }}</span>
+          </a>
+        </div>
+
+        <!-- Nova Área: Contato Comercial -->
+        <div class="contact-card">
+          <h2>Parcerias e Contato</h2>
+          <p>Tem interesse em divulgar sua marca ou projeto?</p>
+          <a :href="'mailto:' + siteData.profile.email" class="contact-btn">
+            ✉️ {{ siteData.profile.email }}
+          </a>
+        </div>
+
+        <!-- Rodapé -->
+        <footer>
+          © {{ currentYear }} - {{ siteData.profile.name }} <br>
+          Desenvolvido por <a href="https://github.com/BlackMix" target="_blank">Mix Dev</a>
+        </footer>
+      </div>
+    </template>
+  </div>
+
+<script>
+const { createApp, ref, computed, onMounted } = Vue;
+
+createApp({
+  setup() {
+    const siteData = ref(null);
+    const dataLoaded = ref(false);
+    const theme = ref('dark');
+    const effect = ref('none');
+    const showSplash = ref(true);
+    const particles = ref([]);
+    const currentYear = new Date().getFullYear();
+
+    // Controle de estado para os botões de cópia
+    const copyStates = ref({
+      gold: { defaultText: '📋 Copiar Código: ', key: 'discountCode', text: 'Carregando...' },
+      barbours: { defaultText: '📋 Copiar CUPOM: ', key: 'discountCodeBarbours', text: 'Carregando...' }
+    });
+
+    // Função de fetch do JSON Externo
+    const loadData = async () => {
+      try {
+        const response = await fetch('data.json');
+        if (!response.ok) throw new Error("Erro ao carregar data.json");
+        siteData.value = await response.json();
+        
+        // Atualiza os textos dos botões após carregar os dados
+        copyStates.value.gold.text = copyStates.value.gold.defaultText + siteData.value.config.discountCode;
+        copyStates.value.barbours.text = copyStates.value.barbours.defaultText + siteData.value.config.discountCodeBarbours;
+        
+        dataLoaded.value = true;
+        
+        // Timeout para a Splash Screen (garante que os assets começaram a carregar)
+        setTimeout(() => { showSplash.value = false; }, 2500);
+      } catch (error) {
+        console.error("Falha ao carregar configuração. Verifique se o data.json está na mesma pasta e servido por um servidor web.", error);
+        alert("Erro ao carregar dados. Verifique o console.");
+      }
+    };
+
+    // Cria array duplicado para o CSS Marquee infinito não quebrar
+    const infiniteList = (list) => [...list, ...list];
+
+    // Lógica unificada para copiar texto
+    const copyCode = async (configKey, stateRef) => {
+      const textToCopy = siteData.value.config[configKey];
+      try {
+        await navigator.clipboard.writeText(textToCopy);
+        stateRef.text = '✅ Copiado com Sucesso!';
+        setTimeout(() => {
+          stateRef.text = stateRef.defaultText + textToCopy;
+        }, 2000);
+      } catch (err) {
+        console.error('Falha ao copiar: ', err);
+      }
+    };
+
+    // Tema Escuro/Claro
+    const toggleTheme = () => {
+      theme.value = theme.value === 'dark' ? 'light' : 'dark';
+      document.body.className = theme.value;
+    };
+
+    // Lógica Sazonal de Efeitos
+    const getSeasonalEffect = () => {
+      const today = new Date();
+      const currentDate = ((today.getMonth() + 1) * 100) + today.getDate();
+
+      const periods = [
+        { name: 'namorados', start: 601, end: 612 },
+        { name: 'saojoao', start: 613, end: 630 },
+        { name: 'copa', start: 611, end: 719 },
+        { name: 'natal', start: 1201, end: 1231 },
+      ];
+
+      return periods.find(p => currentDate >= p.start && currentDate <= p.end)?.name || 'none';
+    };
+
+    const generateParticles = () => {
+      const temp = [];
+      for (let i = 0; i < 35; i++) {
+        temp.push({
+          id: i,
+          left: Math.random() * 100, 
+          delay: Math.random() * 5, 
+          duration: 4 + Math.random() * 6, 
+          size: 16 + Math.random() * 20 
+        });
+      }
+      particles.value = temp;
+    };
+
+    const activeParticles = computed(() => {
+      if (effect.value === 'none') return [];
+      const emojis = {
+        saojoao: ['🔥', '🌽', '🌻', '🎆', '🎊'],
+        namorados: ['❤️', '💖', '💕', '💘', '💌'],
+        natal: ['❄️', '🎄', '🎁', '⭐', '⛄'],
+        copa: ['⚽', '🏆', '🥅', '🇧🇷', '🎉']
+      };
+      const currentEmojis = emojis[effect.value];
+      return particles.value.map(p => ({
+        ...p,
+        emoji: currentEmojis[Math.floor(Math.random() * currentEmojis.length)]
+      }));
+    });
+
+    onMounted(() => {
+      document.body.className = theme.value;
+      effect.value = getSeasonalEffect();
+      generateParticles();
+      loadData();
+    });
+
+    return {
+      siteData, dataLoaded, theme, effect, showSplash, activeParticles,
+      currentYear, copyStates,
+      toggleTheme, copyCode, infiniteList
+    }
+  }
+}).mount('#app')
+</script>
+</body>
+</html>
